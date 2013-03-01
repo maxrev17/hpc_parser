@@ -14,12 +14,13 @@ namespace Parse
         {
             List<Process> processList = new List<Process>();
             string alg = "graph_distance.exe";
+            int averageOver = 100;
 
             for (int h = 2; h <= 8; h++)
             {
                 for (int i = 1; i <= 3; i++)
                 {
-                    string runargs = (Math.Pow(2, i)).ToString() + " " + h.ToString();
+                    string runargs = (Math.Pow(2, i)).ToString() + " " + h.ToString() + " " + averageOver.ToString();
                     var proce = new Process
                     {
                         StartInfo = new ProcessStartInfo
@@ -40,7 +41,8 @@ namespace Parse
             file.WriteLine("Algorithm, Prob Size N, CPUs, Time Orig, Time Tbb, Time Opt, Time Seq");
             foreach (var p in processList)
             {
-                string row = Path.GetFileName(p.StartInfo.FileName) + ',' + p.StartInfo.Arguments.Replace(' ', ',');
+                var arguments = p.StartInfo.Arguments.Split(' ');
+                string row = Path.GetFileName(p.StartInfo.FileName) + ',' + arguments[0] + ',' + arguments[1];
                 p.Start();
                 while (!p.StandardOutput.EndOfStream)
                 {
