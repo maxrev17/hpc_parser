@@ -13,19 +13,21 @@ namespace Parse
         static void Main(string[] args)
         {
             List<Process> processList = new List<Process>();
-            string alg = "graph_distance.exe";
-            int averageOver = 100;
+            string alg = "mat_mat_mul.exe";
+            //string alg = "fft.exe";
+            //string alg = "graph_distance.exe";
+            int averageOver = 10;
 
             for (int h = 2; h <= 8; h++)
             {
-                for (int i = 1; i <= 3; i++)
+                for (int i = 1; i <= 8; i++)
                 {
                     string runargs = (Math.Pow(2, i)).ToString() + " " + h.ToString() + " " + averageOver.ToString();
                     var proce = new Process
                     {
                         StartInfo = new ProcessStartInfo
                         {
-                            FileName = @"C:\Users\Max\Documents\GitHub\hpc\Release\" + alg,
+                            FileName = @"F:\Documents\GitHub\hpc\Release\" + alg,
                             Arguments = runargs,
                             UseShellExecute = false,
                             RedirectStandardOutput = true,
